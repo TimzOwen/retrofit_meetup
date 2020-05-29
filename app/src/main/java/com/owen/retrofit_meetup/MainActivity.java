@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //define listview and find the id
-        ListView listView = findViewById(R.id.list_view);
+        final ListView listView = findViewById(R.id.list_view);
 
         //create Retrofit object
         Retrofit retrofit = new Retrofit.Builder()
@@ -48,12 +49,23 @@ public class MainActivity extends AppCompatActivity {
                 //create an array to store heroes names
                 String[] heroesNames = new String[heroes.size()];
 
-                //loop between the heroes
-                for(Heroes h: heroes){
-                    Log.d("name" ,"" + h.getName());
-                    Log.d("realname","" + h.getRealname());
-                    Log.d("imgurl", "" + h.getImgurl());
+                //loop only names
+                for (int i=0; i<heroes.size(); i++){
+                    heroesNames[i] = heroes.get(i).getName();
+
                 }
+                //loop between the heroes
+//                for(Heroes h: heroes){
+//                    Log.d("name" ,"" + h.getName());
+//                    Log.d("realname","" + h.getRealname());
+//                    Log.d("imgurl", "" + h.getImgurl());
+
+                //now display the hero names in list view
+                listView.setAdapter(new ArrayAdapter<String>(
+                        getApplicationContext(),
+                        android.R.layout.simple_list_item_1,
+                        heroesNames
+                ));
             }
 
             @Override
