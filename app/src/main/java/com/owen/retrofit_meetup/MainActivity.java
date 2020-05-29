@@ -3,10 +3,14 @@ package com.owen.retrofit_meetup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -28,5 +32,28 @@ public class MainActivity extends AppCompatActivity {
 
         //call the API class
         Call<List<Heroes>> call = heroesApi.getHeroes();
+
+        //Now call th API
+        call.enqueue(new Callback<List<Heroes>>() {
+            @Override
+            public void onResponse(Call<List<Heroes>> call, Response<List<Heroes>> response) {
+
+                //get the list of data from the body
+                List<Heroes>  heroes = response.body();
+
+                //loop between the heroes
+                for(Heroes h: heroes){
+                    Log.d("name: ", h.getName());
+                    Log.d("realname: ", h.getRealname());
+                    Log.d("imgUrl: ", h.getImgurl());
+                   
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Heroes>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
