@@ -8,17 +8,17 @@ public class Heroes {
     private String firstappearance;
     private String createdby;
     private String publisher;
-    private String imgurl;
+    private String imageurl;
     private String bio;
 
-    public Heroes(String name, String realname, String team, String firstappearance, String createdby, String publisher, String imgurl, String bio) {
+    public Heroes(String name, String realname, String team, String firstappearance, String createdby, String publisher, String imageurl, String bio) {
         this.name = name;
         this.realname = realname;
         this.team = team;
         this.firstappearance = firstappearance;
         this.createdby = createdby;
         this.publisher = publisher;
-        this.imgurl = imgurl;
+        this.imageurl = imageurl;
         this.bio = bio;
     }
 
@@ -47,7 +47,7 @@ public class Heroes {
     }
 
     public String getImgurl() {
-        return imgurl;
+        return imageurl;
     }
 
     public String getBio() {

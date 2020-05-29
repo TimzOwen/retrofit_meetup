@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //define listview and find the id
+        ListView listView = findViewById(R.id.list_view);
 
         //create Retrofit object
         Retrofit retrofit = new Retrofit.Builder()
@@ -41,12 +45,14 @@ public class MainActivity extends AppCompatActivity {
                 //get the list of data from the body
                 List<Heroes>  heroes = response.body();
 
+                //create an array to store heroes names
+                String[] heroesNames = new String[heroes.size()];
+
                 //loop between the heroes
                 for(Heroes h: heroes){
-                    Log.d("name: ", h.getName());
-                    Log.d("realname: ", h.getRealname());
-                    Log.d("imgUrl: ", h.getImgurl());
-                   
+                    Log.d("name" ,"" + h.getName());
+                    Log.d("realname","" + h.getRealname());
+                    Log.d("imgurl", "" + h.getImgurl());
                 }
             }
 
